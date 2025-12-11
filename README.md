@@ -1,39 +1,54 @@
-Простая библиотека для отладки скетчей на esp32
+# Простая библиотека для отладки скетчей на esp32
 
-Поддерживает работу в LittleFS, SPIFFS, FATFS (тестировано только LittleFS)
+Поддерживает работу с различными файловыми системами:
+*   **LittleFS** (используется по умолчанию)
+*   **SPIFFS** (не тестировано) 
+*   **FATFS** (не тестировано) 
 
-Выбор типа FS осуществляется в основном скетче ПЕРЕД подключением библиотеки с помощью объявления переменной окружения. Если переменная не объявлена используется LittleFS. 
-  + #define BUSYBOX_USE_FATFS
-   
-    или
-  + #define BUSYBOX_USE_SPIFFS
+## Настройка файловой системы
 
-Обертки для FS:
-  - Busybox::begin(FORMAT=false)
-  - Busybox::format()
+Выбор типа файловой системы осуществляется в основном скетче **ПЕРЕД** подключением библиотеки с помощью директив препроцессора.
 
-Обеспечивает вывод в Serial информации:
-  - Busybox::sysinfo()
-  - Busybox::df()
-  - Busybox::stat(FILE)
-  - Busybox::stat(DIR)
-  - Busybox::ls(PATH="/")
-   -Busybox::tree(PATH="/", DEPTH=0, INDENT=0)
+```cpp
+#define BUSYBOX_USE_FATFS
+```
+или
+```cpp
+#define BUSYBOX_USE_SPIFFS
+```
 
-Вывод содерижмого файла:
-  - Busybox::cat(FILE)
-  - Busybox::dump(FILE)
-  - Busybox::view(FILE) - аналог view NC (dump + text)
+Если ни одна из переменных не объявлена — используется **LittleFS**.
 
-Операции с файлами:
-  - Busybox::cp(SRC, DEST)
-  - Busybox::mv(SRC,DEST)
-  - Busybox::rm(FILE, .....)
-  - Busybox::write(FILE, TEXT)
-  - Busybox::append(FILE, TEXT)
+## Обертки для работы с файловой системой
 
-Операции с директориями:
-  - Busybox::mkdir(DIR)
-  - Busybox::rmdir(DIR, FORCE=false)
-  - Busybox::rmrf(DIR)
-  
+* `Busybox::begin(FORMAT=false)` — инициализация ФС.
+* `Busybox::format()` — форматирование ФС.
+
+## Вывод системной информации и состояния ФС
+
+* `Busybox::sysinfo()` — вывод системной информации.
+* `Busybox::df()` — вывод информации о свободном/использованном месте (аналог `df` в Unix).
+* `Busybox::stat(FILE)` — информация о файле.
+* `Busybox::stat(DIR)` — информация о директории.
+* `Busybox::ls(PATH="/")` — список содержимого директории.
+* `Busybox::tree(PATH="/", DEPTH=0, INDENT=0)` — вывод дерева каталогов.
+
+## Просмотр содержимого файлов
+
+* `Busybox::cat(FILE)` — вывод содержимого файла в виде текста.
+* `Busybox::dump(FILE)` — дамп файла в hex-формате.
+* `Busybox::view(FILE)` — аналог `view` в NC (dump + текстовое представление).
+
+## Операции с файлами
+
+* `Busybox::cp(SRC, DEST)` — копирование файла.
+* `Busybox::mv(SRC, DEST)` — перемещение/переименование файла.
+* `Busybox::rm(FILE, .....)` — удаление одного или нескольких файлов.
+* `Busybox::write(FILE, TEXT)` — запись текста в файл (с перезаписью).
+* `Busybox::append(FILE, TEXT)` — добавление текста в конец файла.
+
+## Операции с директориями
+
+* `Busybox::mkdir(DIR)` — создание директории.
+* `Busybox::rmdir(DIR, FORCE=false)` — удаление директории (если `FORCE=false`, то только пустой).
+* `Busybox::rmrf(DIR)` — рекурсивное удаление директории и всего её содержимого.
