@@ -2,6 +2,16 @@
 
 Поддерживает работу в LittleFS, SPIFFS, FATFS (тестировано только LittleFS)
 
+Выбор типа FS осуществляется в основном скетче ПЕРЕД подключением библиотеки с помощью объявления переменной окружения. Если переменная не объявлена используется LittleFS. 
+  + #define BUSYBOX_USE_FATFS
+   
+    или
+  + #define BUSYBOX_USE_SPIFFS
+
+Обертки для FS:
+  - Busybox::begin(FORMAT=false)
+  - Busybox::format()
+
 Обеспечивает вывод в Serial информации:
   - Busybox::sysinfo()
   - Busybox::df()
