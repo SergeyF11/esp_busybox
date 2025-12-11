@@ -2,7 +2,13 @@
 #define BUSYBOX_FATFS_H
 
 #include <FS.h>
+
+#if defined(ARDUINO_ARCH_ESP32) 
+#include <FFat.h>
+#define FATFS FFat
+#elif defined defined(ARDUINO_ARCH_ESP8266)
 #include <FatFS.h>
+#endif
 
 #pragma message("++++++++++++++++++++++ Using FATFS file system ++++++++++++++++++")
 

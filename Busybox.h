@@ -3,13 +3,17 @@
 
 // Автоматический выбор реализации
 #if defined(ARDUINO_ARCH_ESP32) || defined(ARDUINO_ARCH_ESP8266)
-    #if defined(BUSYBOX_USE_FATFS)
+
+    #if defined(BUSYBOX_USE_FATFS) || defined(_FFAT_H_)
         #include "Busybox_FATFS.h"
-    #elif defined(BUSYBOX_USE_SPIFFS)
+    #elif defined(BUSYBOX_USE_SPIFFS) || defined(_SPIFFS_H_)
         #include "Busybox_SPIFFS.h"
-    #else
+    #elif defined(_LITTLEFS_H_)
         #include "Busybox_LFS.h"  // По умолчанию LittleFS
+    #else
+        #error "Unsupported FS
     #endif
+    
 #else
     #error "Unsupported platform"
 #endif
