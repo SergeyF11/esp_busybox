@@ -3,27 +3,27 @@
 Поддерживает работу в LittleFS, SPIFFS, FATFS (тестировано только LittleFS)
 
 Обеспечивает вывод в Serial информации:
-  - Bysibox::sysinfo()
-  - Bysibox::df()
-  - Bysibox::stat(FILE)
-  - Bysibox::stat(DIR)
-  - Bysibox::ls(PATH="/")
-   -Bysibox::tree(PATH="/", DEPTH=0, INDENT=0)
+  - Busybox::sysinfo()
+  - Busybox::df()
+  - Busybox::stat(FILE)
+  - Busybox::stat(DIR)
+  - Busybox::ls(PATH="/")
+   -Busybox::tree(PATH="/", DEPTH=0, INDENT=0)
 
 Вывод содерижмого файла:
-  - Bysibox::cat(FILE)
-  - Bysibox::dump(FILE)
-  - Bysibox::view(FILE) - аналог view NC (dump + text)
+  - Busybox::cat(FILE)
+  - Busybox::dump(FILE)
+  - Busybox::view(FILE) - аналог view NC (dump + text)
 
 Операции с файлами:
-  - Bysibox::cp(SRC, DEST)
-  - Bysibox::mv(SRC,DEST)
-  - Bysibox::rm(FILE, .....)
-  - Bysibox::write(FILE, TEXT)
-  - Bysibox::append(FILE, TEXT)
+  - Busybox::cp(SRC, DEST)
+  - Busybox::mv(SRC,DEST)
+  - Busybox::rm(FILE, .....)
+  - Busybox::write(FILE, TEXT)
+  - Busybox::append(FILE, TEXT)
 
 Операции с директориями:
-  - Bysibox::mkdir(DIR)
-  - Bysibox::rmdir(DIR, FORCE=false)
-  - Bysibox::rmrf(DIR)
+  - Busybox::mkdir(DIR)
+  - Busybox::rmdir(DIR, FORCE=false)
+  - Busybox::rmrf(DIR)
   
